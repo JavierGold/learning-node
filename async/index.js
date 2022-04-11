@@ -23,9 +23,7 @@ const writeFilePro=(file,data)=>{
 
 
 const getDogPic = async () =>{
-
     try {
-        
    const data = await readFilePro(`${__dirname}/dog.txt` )
    console.log(`Breed: ${data}`)
 
@@ -37,10 +35,20 @@ const getDogPic = async () =>{
     }
     catch (err){
         console.log(err.message)
+        throw(err)
     }
+
+    return '2 LISTO'
 }
 
-getDogPic();
+console.log('1 Se recibirán fotos de perros')
+getDogPic().then(x=>{
+    console.log(x)
+    console.log('3 ya se recibieron')
+})
+.catch(err=>{
+    console.log(err);
+})
 
 /* 
 readFilePro(`${__dirname}/dog.txt` )
