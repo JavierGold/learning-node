@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 
 const getAllUsers = (req,res)=>{
     res.status(500).json({
@@ -31,11 +31,6 @@ const deleteUser = (req,res)=>{
 }
 
 const router = express.Router();
-
-app.use('/api/v1/tours',tourRouter);
-app.use('/api/v1/users',userRouter);
-
-
 
 router
     .route('/')
