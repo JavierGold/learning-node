@@ -13,8 +13,27 @@ mongoose.connect(DB,{
     console.log('Conexión exitosa...')
 })
 
-const port = 3000;
+const tourSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, 'Se necesita un nombre'],
+        unique: true
+    },
+    rating: {
+        type:Number,
+        default: 4.5
+    },
+    price: {
+        type: Number,
+        required: [true, 'Se necesita un precio']
+    }
+});
 
+const Tour = mongoose.model('Tour',tourSchema);
+
+
+const port = 3000;
 app.listen(port,()=>{
     console.log(`App corriendo en el puerto ${port}`);
 });
+
