@@ -3,9 +3,6 @@ const express = require('express');
 const morgan =require('morgan')
 const app = express();
 
-
-
-
 app.use(express.json());
 
 app.use(morgan('dev'));
@@ -95,22 +92,69 @@ const deleteTour =(req,res)=>{
     })
 }
 
+
+const getAllUsers = (req,res)=>{
+    res.status(500).json({
+        status: 'error',
+        message: 'En construcción...'});
+}
+
+const createUser = (req,res)=>{
+    res.status(500).json({
+        status: 'error',
+        message: 'En construcción...'});
+}
+
+const getUser = (req,res)=>{
+    res.status(500).json({
+        status: 'error',
+        message: 'En construcción...'});
+}
+
+const updateUser = (req,res)=>{
+    res.status(500).json({
+        status: 'error',
+        message: 'En construcción...'});
+}
+
+const deleteUser = (req,res)=>{
+    res.status(500).json({
+        status: 'error',
+        message: 'En construcción...'});
+}
+
 /* app.get('/api/v1/tours',getAllTours);
 app.get('/api/v1/tours/:id',getTour);
 app.post('/api/v1/tours',createTour);
 app.patch('/api/v1/tours/:id',updateTour);
 app.delete('/api/v1/tours/:id',deleteTour); */
 
-app
-    .route('/api/v1/tours')
+const tourRouter = express.Router();
+const userRouter = express.Router();
+app.use('/api/v1/tours',tourRouter);
+app.use('/api/v1/users',userRouter);
+
+tourRouter
+    .route('/')
     .get(getAllTours)
     .post(createTour);
 
-app
-    .route('/api/v1/tours/:id')
+tourRouter
+    .route('/:id')
     .get(getTour)
     .patch(updateTour)
     .delete(deleteTour);
+
+userRouter
+    .route('/')
+    .get(getAllUsers)
+    .post(createUser)
+
+userRouter
+    .route('/:id')
+    .get(getUser)
+    .patch(updateUser)
+    .delete(deleteUser);    
 
 const port = 3000;
 
