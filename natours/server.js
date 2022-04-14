@@ -7,10 +7,10 @@ const DB = 'mongodb+srv://javi:root@cluster0.1xg4m.mongodb.net/natours?retryWrit
 mongoose.connect(DB,{
     useNewUrlParser: true,
     useCreateIndex: true,
-    userFindAndModify:false
+    useUnifiedTopology: true
 }).then(con =>{
-    console.log(con.connections)
-    console.log('Conexión exitosa...')
+    /* console.log(con.connections) */
+    console.log('Conexión exitosa con la BD...')
 })
 
 
