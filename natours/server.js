@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
 const app =  require('./app')
+const dotenv = require('dotenv')
+
+dotenv.config();
 
 
-const DB = 'mongodb+srv://javi:root@cluster0.1xg4m.mongodb.net/natours?retryWrites=true&w=majority'
 
-mongoose.connect(DB,{
+mongoose.connect(process.env.DATABASE,{
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
