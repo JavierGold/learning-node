@@ -27,9 +27,10 @@ exports.checkID = (req,res,next,val)=>{
 
 exports.getAllTours = async (req, res) => {
 
-    const tours = await Tour.find();
+    
 
     try {
+        const tours = await Tour.find();
         res.status(200).json({
             status: 'success',
             request: req.requestTime,
@@ -46,9 +47,28 @@ exports.getAllTours = async (req, res) => {
     }
 }
 
-exports.getTour = (req, res) => {
-    const id = req.params.id * 1 //al multiplicar hace de un string un int 
-    /* const tour = tours.find(el=>el.id===id)
+exports.getTour = async (req, res) => {
+
+
+    try {
+       const tour = await Tour.findById(req.params.id);
+
+       res.status(200).json({
+        status: 'success',
+        data:{
+            tour
+        }
+    })
+      
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err
+        });
+    }
+
+    /*const id = req.params.id * 1 //al multiplicar hace de un string un int 
+     const tour = tours.find(el=>el.id===id)
     res.status(200).json({
         status: 'success',
         data:{
