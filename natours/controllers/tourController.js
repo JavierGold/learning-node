@@ -1,6 +1,12 @@
 /* const fs = require('fs') */
 const Tour = require('../models/tourModel')
 
+exports.aliasTopTours = (req,res,next) => {
+    req.query.limit = '5'
+    req.query.sort = 'price'
+    next()
+};
+
 /* const tours = JSON.parse( fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)) */
 /* 
 exports.checkID = (req,res,next,val)=>{
