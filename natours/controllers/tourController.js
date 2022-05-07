@@ -137,11 +137,11 @@ exports.getTourStats = async (req, res) => {
             },
             {
                 $group: {
-                    _id:'$difficulty',
-                    numTours:{
+                    _id: '$difficulty',
+                    numTours: {
                         $sum: 1
                     },
-                    numRatings:{
+                    numRatings: {
                         $sum: '$ratingsQuantity'
                     },
                     avgRating: {
@@ -173,4 +173,28 @@ exports.getTourStats = async (req, res) => {
         })
     }
 
+}
+
+exports.getMonthlyPlan = async (req, res) => {
+    try {
+
+        const year = req.param.year * 1 //Para transformarlo en número
+
+        const plan = await Tour.aggregate([{
+            $unwind: '$startDates'
+        }])
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                plan: plan
+            }
+        })
+
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: err
+        })
+    }
 }
