@@ -194,7 +194,8 @@ exports.getMonthlyPlan = async (req, res) => {
                 _id: {
                     $month:'$startDates'
                 },
-                numTourStarts:{$sum:1}
+                numTourStarts:{$sum:1},
+                tours:{$push: '$name'}
             }
         }])
 
