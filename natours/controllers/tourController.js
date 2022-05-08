@@ -197,6 +197,14 @@ exports.getMonthlyPlan = async (req, res) => {
                 numTourStarts:{$sum:1},
                 tours:{$push: '$name'}
             }
+        },{
+            $addFields:{month: '$_id'}
+        },{
+            $project:{
+                _id: 0
+            }
+        },{
+            $sort: {numTourStarts: -1}
         }])
 
         res.status(200).json({
