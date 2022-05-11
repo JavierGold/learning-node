@@ -10,7 +10,6 @@ const tourSchema = new mongoose.Schema({
         trim: true
     },
     slug:String,
-    test:String,
     duration:{
         type:Number,
         required: [true, 'Se necesita una duración'],
