@@ -54,3 +54,17 @@ exports.login =catchAsync (async (req,res,next)=>{
         token
     })
 })
+
+exports.protect = catchAsync(async(req,res,next)=>{
+
+    // obtener el token y checar si existe
+    
+
+    //validar el token
+
+    //checar si el usuario existe
+
+    //checar si el usuario cambio de contraseña después que se tuvo el token
+
+    next();
+});
