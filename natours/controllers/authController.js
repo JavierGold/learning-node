@@ -1,7 +1,8 @@
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const jwt = require('jsonwebtoken');
-const AppError = require('../utils/appError')
+const AppError = require('../utils/appError');
+const {promisify}=require('util');
 
 const signToken = id =>{
     return jwt.sign({id: id}, process.env.JWT_SECRET,{
@@ -65,14 +66,13 @@ exports.protect = catchAsync(async(req,res,next)=>{
          token = req.headers.authorization.split(' ')[1]
     }
 
-    /* console.log(token) */
-
     if(!token){
         return next(new AppError('You are not logged in! Please log in to get access.',401))
     }
 
     //validar el token
 
+    jwt.verify(token, process.env.JWT_SECRET,)
 
 
     //checar si el usuario existe
