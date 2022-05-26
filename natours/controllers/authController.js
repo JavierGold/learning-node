@@ -58,9 +58,22 @@ exports.login =catchAsync (async (req,res,next)=>{
 exports.protect = catchAsync(async(req,res,next)=>{
 
     // obtener el token y checar si existe
-    
+
+    let token
+
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
+         token = req.headers.authorization.split(' ')[1]
+    }
+
+    /* console.log(token) */
+
+    if(!token){
+        return next(new AppError('You are not logged in! Please log in to get access.',401))
+    }
 
     //validar el token
+
+
 
     //checar si el usuario existe
 
