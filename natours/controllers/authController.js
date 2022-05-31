@@ -2,6 +2,7 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const jwt = require('jsonwebtoken');
 const AppError = require('../utils/appError');
+const sendEmail = require('../utils/email');
 const {
     promisify
 } = require('util');
@@ -137,6 +138,7 @@ exports.forgotPassword = catchAsync( async (req, res, next) => {
     await user.save({validateBeforeSave:false});
 
     // 3.- Enviarlo al email del usuario
+    const resetURL = ``
 
 })
 
