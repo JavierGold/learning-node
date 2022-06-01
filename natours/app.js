@@ -2,12 +2,16 @@ const express = require('express');
 const morgan =require('morgan')
 const app = express();
 const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
 const tourRouter=require('./routes/tourRoutes')
 const userRouter=require('./routes/userRoutes')
 
+app.use(express.json());
+
+app.use(helmet());
 
 const limiter = rateLimit({
     max: 100,
@@ -16,7 +20,8 @@ const limiter = rateLimit({
   });
   app.use('/api', limiter);
 
-app.use(express.json());
+// Body parser, reading data from body into req.body
+app.use(express.json({ limit: '10kb' }));
 
 
 app.use(morgan('dev'));
