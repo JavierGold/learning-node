@@ -18,14 +18,21 @@ const tourSchema = new mongoose.Schema({
         type:Number,
         required: [true, 'Se necesita un tamaño máximo'],
     },
-    difficulty:{
+    difficulty: {
         type: String,
-        required: [true, 'Se necesita una dificultad'],
-    },
-    ratingsAverage: {
-        type:Number,
-        default: 4.5
-    },
+        required: [true, 'A tour must have a difficulty'],
+        enum: {
+          values: ['easy', 'medium', 'difficult'],
+          message: 'Difficulty is either: easy, medium, difficult'
+        }
+      },
+      ratingsAverage: {
+        type: Number,
+        default: 4.5,
+        min: [1, 'Rating must be above 1.0'],
+        max: [5, 'Rating must be below 5.0'],
+        set: val => Math.round(val * 10) / 10 // 4.666666, 46.6666, 47, 4.7
+      },
     ratingsQuantity: {
         type:Number,
         default: 0
@@ -36,7 +43,14 @@ const tourSchema = new mongoose.Schema({
     },
     priceDiscount: {
         type: Number,
-    },
+        validate: {
+          validator: function(val) {
+            // this only points to current doc on NEW document creation
+            return val < this.price;
+          },
+          message: 'Discount price ({VALUE}) should be below regular price'
+        }
+      },
     summary:{
         type: String,
         trim: true,
@@ -62,6 +76,10 @@ const tourSchema = new mongoose.Schema({
     startDates: {
         type:[Date],
     },
+    secretTour: {
+        type: Boolean,
+        default: false
+      },
     startLocation: {
         // GeoJSON
         type: {
