@@ -116,6 +116,15 @@ const tourSchema = new mongoose.Schema({
     toObject:{ virtuals:true}
 });
 
+tourSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt'
+  });
+
+  next();
+});
+
 tourSchema.virtual('durationWeek').get(function(){
     return this.duration / 7
 })
