@@ -135,6 +135,12 @@ this.slug = slugify(this.name,{lower:true})
 next()
 })
 
+tourSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'tour',
+  localField: '_id'
+});
+
 const Tour = mongoose.model('Tour',tourSchema);
 
 module.exports = Tour;
