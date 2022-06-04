@@ -14,8 +14,9 @@ exports.updateReview = factory.updateOne(Review);
 exports.deleteReview = factory.deleteOne(Review);
 exports.createReview = factory.createOne(Review);
 exports.getReview = factory.getOne(Review);
+exports.getAllReviews = factory.getAll(Review);
 
-exports.getAllReviews = catchAsync( async (req,res,next)=>{
+/* exports.getAllReviews = catchAsync( async (req,res,next)=>{
     
     let filter = {}
     if(req.params.tourId) filter={tour:req.params.tourId}
@@ -29,7 +30,7 @@ exports.getAllReviews = catchAsync( async (req,res,next)=>{
             reviews
         }
       });
-});
+}); */
 
 
 /* exports.createReview = catchAsync( async (req,res,next)=>{
