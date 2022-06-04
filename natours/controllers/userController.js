@@ -11,6 +11,10 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
 
 exports.createUser = (req,res)=>{
     res.status(500).json({
