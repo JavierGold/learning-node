@@ -73,11 +73,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 });
 
 
-exports.getUser = (req,res)=>{
-    res.status(500).json({
-        status: 'error',
-        message: 'En construcción...'});
-}
+exports.getUser = factory.getOne(User);
 
 exports.updateUser = factory.updateOne(User);
 
