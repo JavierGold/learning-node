@@ -56,7 +56,10 @@ exports.createTour = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateTour = catchAsync(async (req, res, next) => {
+exports.updateTour = factory.updateOne(Tour);
+
+
+/* exports.updateTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
@@ -72,7 +75,7 @@ exports.updateTour = catchAsync(async (req, res, next) => {
       tour
     }
   });
-});
+}); */
 
 
 exports.deleteTour = factory.deleteOne(Tour);
