@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const path=require('path');
 
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
@@ -15,6 +16,10 @@ const reviewRouter = require('./routes/reviewRoutes')
 
 app.use(express.json());
 
+app.set('view engine','pug');
+app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 
 const limiter = rateLimit({
@@ -51,7 +56,7 @@ app.use(
 
 
 app.use(morgan('dev'));
-app.use(express.static(`${__dirname}/public`))
+
 
 app.use((req, res, next) => {
 
@@ -63,6 +68,14 @@ app.use((req, res, next) => {
     console.log(req.headers)
     next()
 })
+
+app.get('/',(req,res)=>{
+  res.status(200).render('base',{
+    tour: 'Un tour',
+    user: 'Javier'
+  });
+})
+
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
