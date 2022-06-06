@@ -120,7 +120,35 @@ exports.protect = catchAsync(async (req, res, next) => {
     next();
 });
 
-
+exports.isLoggedIn = async (req, res, next) => {
+    if (req.cookies.jwt) {
+      try {
+        //verificar que haya token
+        const decoded = await promisify(jwt.verify)(
+          req.cookies.jwt,
+          process.env.JWT_SECRET
+        );
+  
+       //checar si el usuario existe
+        const currentUser = await User.findById(decoded.id);
+        if (!currentUser) {
+          return next();
+        }
+  
+        // checar si el usuario cambión de contraseña
+        if (currentUser.changedPasswordAfter(decoded.iat)) {
+          return next();
+        }
+  
+        // checar si ya está iniciado
+        res.locals.user = currentUser;
+        return next();
+      } catch (err) {
+        return next();
+      }
+    }
+    next();
+  };
 
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
