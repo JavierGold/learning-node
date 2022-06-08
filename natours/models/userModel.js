@@ -20,7 +20,10 @@ const userSchema = new mongoose.Schema({
         enum: ['user', 'guide', 'lead-guide', 'admin'],
         default: 'user'
       },
-    photo:String,
+      photo: {
+        type: String,
+        default: 'default.jpg'
+      },
     password:{
         type:String,
         required:[true,'Please provide a password!'],
@@ -72,7 +75,7 @@ userSchema.pre(/^find/, function(next) {
 
 userSchema.methods.correctPassword = async function(candidatePassword , userPassword){
     return await bcrypt.compare(candidatePassword,userPassword);
-}
+};
 
 userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
     if (this.passwordChangedAt) {

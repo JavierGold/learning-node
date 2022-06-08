@@ -29,7 +29,7 @@ const createSendToken = (user, statusCode, res) => {
   
     res.cookie('jwt', token, cookieOptions);
   
-    // Remove password from output
+    //para que no salga la contraseña en la res
     user.password = undefined;
   
     res.status(statusCode).json({
@@ -47,7 +47,8 @@ exports.signup = catchAsync(async (req, res, next) => {
         email: req.body.email,
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
-        role: req.body.role
+        role: req.body.role,
+        photo:req.body.photo
     });
 
     createSendToken(newUser,201,res)
@@ -78,8 +79,17 @@ exports.login = catchAsync(async (req, res, next) => {
 
     //si todo está bien envía el token al user
     createSendToken(user,200,res)
-})
+});
 
+exports.logout = (req, res) => {
+    res.cookie('jwt', 'loggedout', {
+      expires: new Date(Date.now() + 10 * 1000),
+      httpOnly: true
+    });
+    res.status(200).json({ status: 'success' });
+  };
+
+  
 exports.protect = catchAsync(async (req, res, next) => {
 
     // obtener el token y checar si existe
