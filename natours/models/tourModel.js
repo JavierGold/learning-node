@@ -63,11 +63,11 @@ const tourSchema = new mongoose.Schema({
     },
     imageCover: {
         type:String,
-        required: [true, 'Se necesita una imagen de portada']
+        //required: [true, 'Se necesita una imagen de portada']
     },
     images: {
         type:[String],
-        required: [true, 'Se necesita una imagen']
+        //required: [true, 'Se necesita una imagen']
     },
     createdAt: {
         type:Date,

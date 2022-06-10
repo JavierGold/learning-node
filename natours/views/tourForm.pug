@@ -1,0 +1,32 @@
+extends base
+
+block content
+  main.main
+    .login-form
+      h2.heading-secondary.ma-bt-lg Add a tour
+      form.form.form--tourForm
+        .form__group
+          label.form__label(for='name') Name
+          input#name.form__input(type='text', placeholder='Your name', required)
+        .form__group
+          label.form__label(for='duration') Duration
+          input#duration.form__input(type='number', placeholder='Please specify a duration', required)
+        .form__group
+          label.form__label(for='maxGroupSize') Max group size
+          input#maxGroupSize.form__input(type='number', placeholder='Please specify a max group size', required)
+        .form__group
+          label.form__label(for='difficulty') Diffculty
+          input#difficulty.form__input(type='text', placeholder='Please specify a difficulty', required)
+        .form__group
+          label.form__label(for='price') Price
+          input#price.form__input(type='number', placeholder='Please specify a price', required)
+        .form__group
+          label.form__label(for='summary') Summary
+          input#summary.form__input(type='text', placeholder='Please specify a summary', required)
+        .form__group
+          label.form__label(for='description') Description
+          input#description.form__input(type='text', placeholder='Please specify a description', required)
+        .form__group
+          button.btn.btn--green Add Tour
+
+

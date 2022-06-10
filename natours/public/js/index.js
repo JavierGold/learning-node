@@ -3,10 +3,12 @@ import { displayMap } from './mapbox';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import {signup} from './signup';
+import {tourForm} from './tourForm'
 
 const mapBox = document.getElementById('map');
 const signupForm = document.querySelector('.form--signup');
 const loginForm = document.querySelector('.form--login');
+const formTour = document.querySelector('.form--tourForm');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
@@ -34,7 +36,19 @@ if (signupForm)
       const role = document.getElementById('role').value;
       signup(name,email, password,passwordconfirm,role);
     });
-
+    
+if (formTour)
+    formTour.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const duration = document.getElementById('duration').value;
+      const maxGroupSize = document.getElementById('maxGroupSize').value;
+      const difficulty = document.getElementById('difficulty').value;
+      const price = document.getElementById('price').value;
+      const summary = document.getElementById('summary').value;
+      const description = document.getElementById('description').value;
+      tourForm(name,duration, maxGroupSize,difficulty,price,summary,description);
+    });
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
