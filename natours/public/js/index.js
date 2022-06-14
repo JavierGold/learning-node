@@ -53,15 +53,19 @@ if (formTour)
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
 if (userDataForm)
-  userDataForm.addEventListener('submit', e => {
+  userDataForm.addEventListener('submit', async e => {
     e.preventDefault();
-    const form = new FormData();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+   /*  const form = new FormData();
     form.append('name', document.getElementById('name').value);
-    form.append('email', document.getElementById('email').value);
-    form.append('photo', document.getElementById('photo').files[0]);
+    form.append('email', document.getElementById('email').value); */
+    //form.append('photo', document.getElementById('photo').files[0]);
     
-    console.log()
-    updateSettings(form, 'data');
+    //updateSettings(form, 'data');
+    await updateSettings({name,email},'data');
+
   });
 
 if (userPasswordForm)
